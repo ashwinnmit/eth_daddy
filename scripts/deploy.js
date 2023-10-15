@@ -11,7 +11,14 @@ const tokens = (n) => {
 }
 
 async function main() {
+    const [deployer] = await hre.ethers.getSigners();
+    const JARV = await ethers.getContractFactory('jarv');
+    const jarv = await JARV.deploy();
+    await jarv.deployed();
 
+    await jarv.connect(deployer).setData("Ashwin", 9945670164,"Male", "ashwinrb74@gmail.com", "O+", "hash");
+
+    console.log(`Deployed contract at : ${jarv.address}`);
 }
 
 main().catch((error) => {
